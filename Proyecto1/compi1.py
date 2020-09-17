@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 from tkinter import *
 from tkinter import ttk
@@ -8,7 +9,7 @@ from CSS import *
 from HTML import *
 from Expresiones import *
 
-
+from tkinter.filedialog import asksaveasfile 
 
 import os
 alv =""
@@ -27,7 +28,11 @@ class Compi:
         #############################################_MENU_#############################################
         self.cargar = Button(frame, text ="Cargar", command = self.fileMenu)
         self.cargar.grid(row=0,column=0)
-
+        
+        self.guardar = Button(frame, text ="guardar" )
+        
+        self.guardar.grid(row=0,column=8)
+        self.guardar.config(command= self.file_save)
         self.ejecutar = Button(frame, text ="Ejecutar", command = self.analizar)
         self.ejecutar.grid(row=0,column=1)
 
@@ -73,17 +78,16 @@ class Compi:
         return
     #END
     
-    def file_save():
+    def file_save(self):
     
           files = [('All Files', '*.*'),  
-          ('Python Files', '*.py'), 
+          ('Python Files', '*.js'), 
           ('Text Document', '*.txt')]
-          name=asksaveasfile(mode='w',defaultextension=".txt")
-          text2save=str(text.get(0.0,END))
+          name=asksaveasfile(mode='w', filetypes=files,defaultextension=files)
+          text2save=(self.entrada.get(1.0,END))
           name.write(text2save)
-          name.close 
+          name.close()
 
-    def guardar():
         
     def analizar(self):
         texto = self.entrada.get("1.0",END)
@@ -114,13 +118,7 @@ class Compi:
          
         #Expresiones.analizadorJS(texto)
         #Expresiones.graficarE()
-        if auxs is 2:
-          print("seeeeee")
-          
-          
         
-        else:
-          print("efe")
         
         self.printSalida()
     #END
