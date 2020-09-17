@@ -25,10 +25,18 @@ class HTML:
             
                 if estado==0:
                     if char=="<":
-                        estado=1
+                        estado=19
                         Traduccion+=char
                         columna=columna+1
+                        print("a estado19")
+                        ayuda=0
                         i=i+1
+                    elif char.isalpha():
+                         estado=1
+                         Traduccion+=char
+                         columna=columna+1
+                         ayuda=0
+                         i=i+1    
                     elif char==">":
                         if ayuda==20:
                             estado=0
@@ -65,20 +73,20 @@ class HTML:
                         fila=fila+1
                         i=i+1
                     else:
-                       
-                            print("error")
-                            lex+=char
-                            print("error"+char) 
-                            a=Errores()
-                            a.Lex=lex
-                            a.fila=fila
-                            a.columna=columna
-                            print(str(columna))
-                            a.Descripcion="Simbolo no reconocido por el sistema"
-                            lista.append(a)
-                            lex=""                
-                            estado=0
-                            i=i+1  
+                         print("efe")
+                         print("error")
+                         lex+=char
+                         print("error"+char) 
+                         a=Errores()
+                         a.Lex=lex
+                         a.fila=fila
+                         a.columna=columna
+                         print(str(columna))
+                         a.Descripcion="Simbolo no reconocido por el sistema"
+                         lista.append(a)
+                         lex=""                
+                         estado=0
+                         i=i+1  
                 elif estado==1:
                     if char.isalpha():
                         lex+=char
@@ -245,6 +253,20 @@ class HTML:
                         estado=0
                         lex=""
                         Traduccion+=char  
+                elif estado==19:
+                     if char=="!":
+                          Traduccion+=char
+                          columna=columna+1
+                          estado=20
+                          print("en estado 19")
+                          i=i+1
+                     else :
+                         columna=columna+1
+                         Traduccion+=char
+                         estado=0
+                         print("efe")
+                         i=i+1                                
+                
                 elif estado==20:
                      if char=="-":
                           Traduccion+=char
@@ -262,7 +284,7 @@ class HTML:
                      if char=="-":
                           Traduccion+=char
                           columna=columna+1
-                          estado=22
+                          estado=30
                           i=i+1
                           
                      else :
@@ -271,6 +293,21 @@ class HTML:
                          estado=0
                          i=i+1
                          print("efe")
+                         
+                         
+                elif estado==30:
+                     if char=="-":
+                          Traduccion+=char
+                          columna=columna+1
+                          estado=22
+                          i=i+1
+                     else :
+                         columna=columna+1
+                         Traduccion+=char
+                         estado=0
+                         print("efe")
+                         i=i+1                                
+                         
                 elif estado==22:
                      if char=="-":
                           Traduccion+=char
@@ -290,7 +327,7 @@ class HTML:
                      if char=="-":
                           Traduccion+=char
                           columna=columna+1
-                          estado=24
+                          estado=40
                           i=i+1
                      else :
                          columna=columna+1
@@ -298,6 +335,18 @@ class HTML:
                          estado=0
                          print("efe")
                          i=i+1
+                elif estado==40:
+                     if char=="-":
+                          Traduccion+=char
+                          columna=columna+1
+                          estado=24
+                          i=i+1
+                     else :
+                         columna=columna+1
+                         Traduccion+=char
+                         estado=0
+                         print("efe")
+                         i=i+1                                
                 
                 elif estado==24:
                      if char==">":
@@ -401,7 +450,7 @@ class HTML:
     def graficarE():
           codigoHtml=""
           print("Errores")
-          reporte=open("ReporteCss.html","w")
+          reporte=open("ReporteHtml.html","w")
           codigoHtml ="<html >"
           codigoHtml+="<head>"+ "<title>Reporte </title>"  + "    </head>" + "    <body>\n"
           codigoHtml+= "    <center>" +""

@@ -6,16 +6,20 @@ from tkinter import messagebox
 from JS import *
 from CSS import *
 from HTML import *
+from Expresiones import *
+
+
 
 import os
 alv =""
-auxs=1
 
 class Compi:
  
     def __init__(self, window):
         self.ventana = window
         self.ventana.title("Proyecto1")
+        self.valor=0
+        
        
         frame = LabelFrame(self.ventana, text = '')
         frame.grid(row=0,column=0,columnspan=20,pady=20)
@@ -48,9 +52,15 @@ class Compi:
     def fileMenu(self):
         filename = askopenfilename()
         alv=filename.split('.')[1]
-        if alv=="py":
-         print("Siuu")
-         aux=1
+        if alv=="js":
+            print("Siuu")
+            self.valor=1
+        elif alv=="css":
+            self.valor=2
+        elif alv=="html":
+            self.valor=3
+        elif alv=="rmt":
+            self.valor=4            
         
         auxs=2
         archivo = open(filename,"r")
@@ -63,20 +73,52 @@ class Compi:
         return
     #END
     
+    def file_save():
     
+          files = [('All Files', '*.*'),  
+          ('Python Files', '*.py'), 
+          ('Text Document', '*.txt')]
+          name=asksaveasfile(mode='w',defaultextension=".txt")
+          text2save=str(text.get(0.0,END))
+          name.write(text2save)
+          name.close 
+
+    def guardar():
+        
     def analizar(self):
         texto = self.entrada.get("1.0",END)
         
         print("analizando: "+texto)
-        HTML.analizadorJS(texto)
-        HTML.graficarE()
-        HTML.ReubicaionJs()
+        if self.valor==1:
+            JS.analizadorJS(texto)
+            JS.ReubicaionJs()
+            JS.graficarE()
+            messagebox.showinfo("Analizando", "Javascript:\n")
+        elif self.valor==2:
+            CSS.analizadorJS(texto)
+            CSS.ReubicaionJs()
+            CSS.graficarE()
+           
+            messagebox.showinfo("Analizando", "css:\n")
+        elif self.valor==3:
+            HTML.analizadorJS(texto)
+            HTML.ReubicaionJs()
+            HTML.graficarE()
+           
+            messagebox.showinfo("Analizando", "Html:\n")
+        elif self.valor==4:
+            Expresiones.analizadorJS(texto)
+            Expresiones.graficarE()
+            messagebox.showinfo("Analizando", "de expresiones:\n")
+            
+         
+        #Expresiones.analizadorJS(texto)
+        #Expresiones.graficarE()
         if auxs is 2:
           print("seeeeee")
           
           
         
-          messagebox.showinfo("Analizando", "Javascript:\n")
         else:
           print("efe")
         

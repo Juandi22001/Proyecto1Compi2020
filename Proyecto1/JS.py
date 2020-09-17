@@ -4,6 +4,7 @@ listaR=list()
 
 lista=list()
 import os
+import webbrowser
 from Ruta  import *
 from Errores import *
 class JS :
@@ -20,6 +21,9 @@ class JS :
             Traduccion=""
             fila=0
             lexA=""
+            valID=0
+            valMulti=0
+            valNOrmal=0
          
             i=0
             while (i<len(cadena)):
@@ -329,8 +333,9 @@ class JS :
                      lex+=char           
                       
                else:
-                    print("id")
+                    print("encontrando id")
                     estado=0
+                    valID=1
                     columna=columna+1
                     lex=""
              
@@ -450,7 +455,7 @@ class JS :
                     Traduccion+=char
                     i=i+1 
                     columna=columna+1
-                    print ("a estado11")
+                    print ("a estado11"+char )
                 elif char=='/':
                     estado=14
                     Traduccion+=char
@@ -458,37 +463,43 @@ class JS :
                     columna=columna+1
                     
               elif estado==11:
-                if char=='*':
+                if char=="*":
                     estado=12
                     Traduccion+=char
-                    i=i+1 
+                    i=i+1
+                    print("a estado12"+char) 
                     columna=columna+1
                   
                 else :
                     estado=11
                     lex+=char
                     i=i+1 
+                    print("en estado 11"+"char")
                     columna=columna+1
                     Traduccion+=char
-                    lexA+=char
+                    
                   
               elif estado==12:
                 if char=="/":
                     print("comentario multi")
-                    estado=0
+                    valMulti=3
                     Traduccion+=char
                     i=i+1 
                     columna=columna+1
+                    estado=0
+                    
                 else:
                     estado=11
                     Traduccion+=char
                     i=i+1 
+                    print("retorno estado 11"+"-"+char)
                     columna=columna+1
                   
               elif estado==14:
                 if char=="\n":
                     print("comentario normal")
                     estado=0
+                    valNOrmal=5
                     Traduccion+=char
                     alv=alv+1
                     
@@ -542,7 +553,29 @@ class JS :
                     Traduccion+=char
                     columna=columna+1
                     i=i+1 
-            
+                    
+            suma=valID+valMulti+valNOrmal
+            print(str(suma)+"-----------------------------------------------------------------------")
+            if suma==9:
+                    webbrowser.open_new_tab("3er.Html")
+            elif suma==4:
+                    webbrowser.open_new_tab("id_Multi.html")
+            elif suma==6:
+                    webbrowser.open_new_tab("Id_Normal.html")
+            elif suma==8:
+                    webbrowser.open_new_tab("Comentarios.html")
+            elif suma==1:
+                    webbrowser.open_new_tab("ID.html")
+            elif suma==3:
+                    webbrowser.open_new_tab("Multi.html")
+            elif suma==5:
+                    webbrowser.open_new_tab("Normal.html")
+                    
+                    
+                    
+                            
+                    
+                
             
             print(lexA) 
             a=Ruta()
@@ -593,7 +626,8 @@ class JS :
                     
                     estado=3
                     
-         print("ruta"+"------"+root)           
+         print("ruta"+"------"+root)    
+                
          os.mkdir(root)          
          a=open(root+'/'+'Re.js','w')
          a.writelines(listaR[0].Contenidop)                                                 
