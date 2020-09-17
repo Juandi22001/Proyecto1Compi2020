@@ -64,13 +64,19 @@ class Compi:
     def fileMenu(self):
         filename = askopenfilename()
         alv=filename.split('.')[1]
+        alv2=filename.split('/')
+        aux=alv2[len(alv2)-1].split('.')[0]
+        
         if alv=="js":
             print("Siuu")
+            JS.ayudaName(aux)
             self.valor=1
         elif alv=="css":
+            CSS.ayudaName(aux)
             self.valor=2
         elif alv=="html":
             print("se encontro un archivo HTML")
+            HTML.ayudaName(aux)
             self.valor=3
         elif alv=="rmt":
             self.valor=4            
@@ -95,7 +101,7 @@ class Compi:
           text2save=(self.entrada.get(1.0,END))
           name.write(text2save)
           name.close()
-
+         
         
     def analizar(self):
         texto = self.entrada.get("1.0",END)

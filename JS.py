@@ -1,5 +1,7 @@
 global lista
 global listaR
+global nombre
+name =list()
 listaR=list()
 
 lista=list()
@@ -595,7 +597,11 @@ class JS :
             a.ruta=lexA
             listaR.append(a)
                    
-            
+  def ayudaName(nombre):
+    a=Ruta()
+    a.nombre=nombre
+    name.append(a)
+                
   def ReubicaionJs():
      cont=0 
      aux=0
@@ -641,7 +647,7 @@ class JS :
          print("ruta"+"------"+root)    
                 
          os.mkdir(root)          
-         a=open(root+'/'+'Re.js','w')
+         a=open(root+'/'+name[0].nombre+'.js','w')
          a.writelines(listaR[0].Contenidop)                                                 
   def graficarE():
       codigoHtml=""

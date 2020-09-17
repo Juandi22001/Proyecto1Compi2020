@@ -1,6 +1,9 @@
 global lista
 global listaR
+global nombre
+name =list()
 listaR=list()
+
 
 lista=list()
 import os
@@ -616,6 +619,11 @@ class CSS :
             a.ruta=lexA
             listaR.append(a)
            
+  
+    def ayudaName(nombre):
+         a=Ruta()
+         a.nombre=nombre
+         name.append(a) 
     def ReubicaionJs():
          cont=0 
          aux=0
@@ -657,7 +665,7 @@ class CSS :
          print("ruta"+"------"+root)           
          print(root)
          os.mkdir(root)          
-         a=open(root+'/'+'R.css','w')
+         a=open(root+'/'+name[0].nombre+'.css','w')
          a.writelines(listaR[0].Contenidop)                              
     def graficarE():
           codigoHtml=""

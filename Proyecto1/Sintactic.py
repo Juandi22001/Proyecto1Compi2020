@@ -1,3 +1,0 @@
-class Sintactic:
-      Expresion=""
-      valor=""
