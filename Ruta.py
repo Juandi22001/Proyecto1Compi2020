@@ -1,0 +1,3 @@
+class Ruta:
+        Contenidop=""
+        ruta=""
